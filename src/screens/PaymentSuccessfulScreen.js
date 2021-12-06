@@ -1,12 +1,12 @@
+import { NavigationContainer } from '@react-navigation/native'
 import React, { Component } from 'react'
 import { View ,Text,Image, TouchableOpacity,StyleSheet} from 'react-native'
 
-export default class OnlineShoppingScreen extends Component {
-    render() {
+export default function PaymentSuccessfulScreen ({navigation}) {
         return (
             <View style ={styles.container}>
                 <View style ={styles.headerContainer}>
-                    <Text style={styles.headerText}>ONLINE SHOPPING</Text>
+                    <Text style={styles.headerText}>PAYMENT SUCCESSFUL</Text>
                 </View>
                 <View style= {styles.info}>
                     <Text style={styles.infoText} numberOfLines={5}>
@@ -15,14 +15,23 @@ export default class OnlineShoppingScreen extends Component {
                      quis nostrud exercitation ullamco laboris nisi ut aliquip 
                     </Text>
                 </View>
-                <Image style={styles.Image} source={require('../assets/online-shopping.png')} />
+                <Image style={styles.Image} source={require('../../assets/images/payment-successful.png')} />
                 <TouchableOpacity style={styles.button}>
                     <Text style={styles.buttonText}>Next</Text>
                 </TouchableOpacity>
+
+                <View style= {styles.footer}>
+                    <TouchableOpacity
+                     onPress={()=>{
+                        navigation.navigate("AddToCart")
+                    }}
+                    style={styles.jumpbuttons}>
+                        <Text style ={styles.jumpbuttonsText}>Previous</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         )
     }
-}
 
 const styles = StyleSheet.create({
     container:{
@@ -39,7 +48,9 @@ const styles = StyleSheet.create({
     infoText:{
         color:"#aaaaaa",
         lineHeight:30,
-        fontSize:16
+        fontSize:16,
+        alignSelf:'center',
+        justifyContent:"center"
     },
     Image:{
         height:300,
@@ -59,6 +70,15 @@ const styles = StyleSheet.create({
         color:'white',
         fontWeight:"bold",
         fontSize:20,
+    },
+    footer:{
+        flexDirection:"row",
+        justifyContent:"space-between",
+        alignItems:"flex-end",
+        marginTop:60
+    },
+    jumpbuttonsText:{
+        color:"gray"
     }
 
 })

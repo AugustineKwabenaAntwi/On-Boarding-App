@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { View ,Text,Image, TouchableOpacity,StyleSheet} from 'react-native'
 
-export default class AddToCartScreen extends Component {
-    render() {
+export default function AddToCartScreen  ({route,navigation}) {
+    const {newTitle} = route.params
         return (
             <View style ={styles.container}>
                 <View style ={styles.headerContainer}>
-                    <Text style={styles.headerText}>ADD TO CART</Text>
+                    <Text style={styles.headerText}>{newTitle}</Text>
                 </View>
                 <View style= {styles.info}>
                     <Text style={styles.infoText} numberOfLines={5}>
@@ -15,14 +15,31 @@ export default class AddToCartScreen extends Component {
                      quis nostrud exercitation ullamco laboris nisi ut aliquip 
                     </Text>
                 </View>
-                <Image style={styles.Image} source={require('../assets/add-to-cart.png')} />
-                <TouchableOpacity style={styles.button}>
+                <Image style={styles.Image} source={require('../../assets/images/add-to-cart.png')} />
+                <TouchableOpacity
+                 onPress={()=>{navigation.navigate("PaymentSuccessful")}}
+                 style={styles.button}>
                     <Text style={styles.buttonText}>Next</Text>
                 </TouchableOpacity>
+                <View style= {styles.footer}>
+                    <TouchableOpacity
+                    onPress={()=>{
+                        navigation.navigate("OnlineShopping")
+                    }}
+                     style={styles.jumpbuttons}>
+                        <Text style ={styles.jumpbuttonsText}>Previous</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                    onPress={()=>{
+                        navigation.navigate("PaymentSuccessful")
+                    }}
+                     style={styles.jumpbuttons}>
+                        <Text style ={styles.jumpbuttonsText}>Skip</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         )
     }
-}
 
 const styles = StyleSheet.create({
     container:{
@@ -39,7 +56,9 @@ const styles = StyleSheet.create({
     infoText:{
         color:"#aaaaaa",
         lineHeight:30,
-        fontSize:16
+        fontSize:16,
+        alignSelf:'center',
+        justifyContent:"center"
     },
     Image:{
         height:300,
@@ -59,6 +78,15 @@ const styles = StyleSheet.create({
         color:'white',
         fontWeight:"bold",
         fontSize:20,
+    },
+    footer:{
+        flexDirection:"row",
+        justifyContent:"space-between",
+        alignItems:"flex-end",
+        marginTop:60
+    },
+    jumpbuttonsText:{
+        color:"gray"
     }
 
 })

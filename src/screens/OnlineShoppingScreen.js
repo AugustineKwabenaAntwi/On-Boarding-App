@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import { View ,Text,Image, TouchableOpacity,StyleSheet} from 'react-native'
 
-export default class PaymentSuccessfulScreen extends Component {
-    render() {
+export default function OnlineShoppingScreen({navigation}) {
         return (
             <View style ={styles.container}>
                 <View style ={styles.headerContainer}>
-                    <Text style={styles.headerText}>PAYMENT SUCCESSFUL</Text>
+                    <Text style={styles.headerText}>Online Shopping</Text>
                 </View>
                 <View style= {styles.info}>
                     <Text style={styles.infoText} numberOfLines={5}>
@@ -15,14 +14,27 @@ export default class PaymentSuccessfulScreen extends Component {
                      quis nostrud exercitation ullamco laboris nisi ut aliquip 
                     </Text>
                 </View>
-                <Image style={styles.Image} source={require('../assets/payment-successful.png')} />
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.buttonText}>Next</Text>
+                <Image style={styles.Image} source={require('../../assets/images/online-shopping.png')} />
+                <TouchableOpacity
+                onPress = {()=>{
+                    navigation.navigate("AddToCart",{newTitle:"CART READY"})
+                }} 
+                style={styles.button}>
+                    <Text style={styles.buttonText}>Get Started</Text>
                 </TouchableOpacity>
+
+                <View style= {styles.footer}>
+                    <TouchableOpacity 
+                    onPress={()=>{
+                        navigation.navigate("PaymentSuccessful")
+                    }}
+                    style={styles.jumpbuttons}>
+                        <Text style ={styles.jumpbuttonsText}>Skip</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         )
     }
-}
 
 const styles = StyleSheet.create({
     container:{
@@ -59,6 +71,14 @@ const styles = StyleSheet.create({
         color:'white',
         fontWeight:"bold",
         fontSize:20,
+    },
+    footer:{
+        flexDirection:"row",
+        justifyContent:"flex-end",
+        alignItems:"flex-end",
+        marginTop:60
+    },
+    jumpbuttonsText:{
+        color:"gray"
     }
-
 })

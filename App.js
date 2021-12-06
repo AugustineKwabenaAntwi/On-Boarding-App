@@ -1,21 +1,26 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
+import 'react-native-gesture-handler';
 import { StyleSheet, Text, View } from 'react-native';
-import OnlineShoppingScreen from './components/OnlineShoppingScreen';
-import AddToCartScreen from './components/AddToCartScreen';
-import PaymentSuccessfulScreen from './components/PaymentSuccessfulScreen';
+import {NavigationContainer} from "@react-navigation/native"
+import { createStackNavigator } from '@react-navigation/stack';
+import OnlineShoppingScreen from './src/screens/OnlineShoppingScreen';
+import AddToCartScreen from './src/screens/AddToCartScreen';
+import PaymentSuccessfulScreen from './src/screens/PaymentSuccessfulScreen';
 
-export default function App() {
+
+const Stack = createStackNavigator()
+
+export default function App({}) {
   return (
-    <View style={styles.container}>
-     <OnlineShoppingScreen/>
-    </View>
-  );
+   <NavigationContainer>
+     <Stack.Navigator>
+       <Stack.Screen name = "OnlineShopping" component = {OnlineShoppingScreen}/>
+       <Stack.Screen name ="AddToCart" component = {AddToCartScreen} />
+       <Stack.Screen name = "PaymentSuccessful" component = {PaymentSuccessfulScreen}/>
+     </Stack.Navigator>
+
+
+   </NavigationContainer>
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop:70
-  },
-});
